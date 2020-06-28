@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<script type="text/javascript" src="js/jquery-1.11.3.min.js" ></script>
+		<script type="text/javascript" src="js/bootstrap.js" ></script>
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=A79m2X8ASGVEYCzZUSUrSYafPROcDxMV"></script>
+		<style>
+			/*设置导航栏透明度*/
+			nav{
+				opacity: 0.9;
+			}
+			/*设置导航栏菜单激活的背景色和字体显示*/
+			#ab li.active a{
+				background-color: white;
+				color: black;
+			}
+			/*设置鼠标滑过导航栏菜单的背景色*/
+			#ab li:hover{
+				background-color: black;
+			}
+			/*设置下拉菜单鼠标滑过时的背景色*/
+			.dropdown-menu li:hover a{
+				background-color: black;
+				color: white;
+			}
+			/*设置成员的上下边距*/
+			#a2{
+				padding-top: 100px;
+				padding-bottom: 100px;
+			}
+			/*设置成员信息的图片大小*/
+			#a2 img{
+				width: 80%;
+				height: 80%;
+			}
+			/*鼠标滑过时给图片加边框*/
+			#a2 img:hover{
+				border: 10px solid gainsboro;
+				opacity: 0.5;
+			}
+			/*设置巡演的上下边距*/
+			#a3 .container{
+				padding-top: 80px;
+				padding-bottom: 80px;
+			}
+			/*设置巡演的黑色背景*/
+			#a3{
+				width: 100%;
+				background-color: black;
+			}
+			/*设置联系的上下边距*/
+			#a4{
+				padding-top: 80px;
+				padding-bottom: 80px;
+			}
+			/*设置地图的高宽*/
+			#baidumap{
+				width: 100%;
+				height: 600px;
+			}
+			/*设置所有按钮的样式*/
+			.btn{
+				background-color: black;
+				color: white;
+				padding: 10px 20px;
+				/*去掉圆角*/
+				border-radius: 0;
+				margin-bottom: 10px;
+			}
+			/*设置缩略图样式*/
+			.thumbnail{
+				/*去掉边框*/
+				border: none;
+				padding: 0px;
+				/*去掉圆角*/
+				border-radius: 0;
+			}
+			/*设置购票按钮下边距*/
+			.thumbnail .btn{
+				margin-bottom: 50px;
+			}
+			/*鼠标滑过按钮或按钮激活时的样式*/
+			.btn:hover,.btn:focus{
+				background-color: white;
+				color: black;
+				/*黑色边框*/
+				border: 1px solid black; 
+			}
+		</style>
+		<script type="text/javascript">
+			$(function(){
+				//百度API功能
+				var map=new BMap.Map('baidumap');	//创建Map实例
+				map.centerAndZoom(new BMap.Point(108.06,24.7),15);//初始化地图，设置中心点坐标和地图级别
+				map.addControl(new BMap.MapTypeControl());//添加地图类型控件
+				map.setCurrentCity("河池");			//设置地图显示的城市
+				map.enableScrollWheelZoom(true);	//开启鼠标滚轮缩放
+				
+				//触发工具提示
+				$('[data-toggle="tooltip"]').tooltip();
+			})
+		</script>
+	</head>
+	<body data-spy="scroll" data-target="#ab" data-offset="200">
+		<!--导航栏-->
+		<nav class="navbar navbar-fixed-top navbar-inverse">
+			<div class="navbar-header">
+				<img src="img/logo.png" width="120px" style="margin-left: 20px; margin-top: 10px;"/>
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#ab" style="margin-right: 30px;">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+			<div class="collapse navbar-collapse navbar-right" id="ab" style="margin-right: 30px;">
+				<ul class="nav navbar-nav ">
+					<li class="active"><a href="#a1">主页</a></li>
+					<li><a href="#a2">成员</a></li>
+					<li><a href="#a3">巡演</a></li>
+					<li><a href="#a4">联系</a></li>
+					<li>
+						<a href="#" data-toggle='dropdown'>
+							更多<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="#">单曲</a></li>
+							<li><a href="#">专辑</a></li>
+						</ul>
+					</li>
+					<li><a href="#"><span class="glyphicon glyphicon-search"></span></a></li>
+				</ul>
+			</div>
+		</nav>
+		<!--主页,轮播图-->
+		<div id="a1">
+			<div class="carousel slide" id="mycar" data-ride="carousel" data-interval="2000" >
+				<!--轮播图计时器-->
+				<ol class="carousel-indicators">
+					<li data-target="#mycar" data-slide-to="0" class="active"></li>
+					<li data-target="#mycar" data-slide-to="1"></li>
+					<li data-target="#mycar" data-slide-to="2"></li>
+				</ol>
+				<!--放置轮播图的图片
+					item:放置每一张轮播图的内容
+					carousel-caption：文字说明
+				-->
+				<div class="carousel-inner" id="a1">
+					<div class="item active">
+						<img src="img/ych1.jpg" width="100%" />
+						<div class="carousel-caption" >
+							<h2>北京</h2>
+							<p>北京久等了！</p>
+						</div>
+					</div>
+					<div class="item">
+						<img src="img/ych2.jpg" width="100%" />
+						<div class="carousel-caption" >
+							<h2>上海</h2>
+							<p>一个难忘的夜晚。</p>
+						</div>
+					</div>
+					<div class="item">
+						<img src="img/ych3.jpg" width="100%" />
+						<div class="carousel-caption" >
+							<h2>武汉</h2>
+							<p>越听，越想走路回青春。</p>
+						</div>
+					</div>
+				</div>
+				<!--轮播图控制器
+					data-slide="prev/next"：切换到前/后一张图片
+					left/right：控制图标的显示位置
+				-->
+				<a href="#mycar" class="carousel-control left" data-slide="prev">
+					<span class="glyphicon glyphicon-chevron-left"></span>
+				</a>
+				<a href="#mycar" class="carousel-control right" data-slide="next">
+					<span class="glyphicon glyphicon-chevron-right"></span>
+				</a>
+			</div>
+		</div>		
+		<!--成员-->
+		<div id="a2">
+			<div class="container">
+				<div class="row text-center">
+					<h3>我们的成员</h3>
+					<p><i>我们爱音乐！</i></p>
+					<p>XX乐队有一群热爱音乐的年经人组成，成立两年来，已经成为校园赤手可热的新生代摇</p>
+				</div>
+				<div class="row">
+					<div class="col-xs-4 text-center">
+						<p><b>Susan</b></p>
+						<img src="img/member1.jpg" class="img-circle" data-toggle="collapse" data-target="#coll1"/>
+						<br /><br />
+						<div class="collapse" id="coll1">
+							<p><b>主唱</b></p>
+							<p><b>1987-10-23,湖北武汉人</b></p>
+							<p><b>擅长动人的抒情歌曲，喜欢RB,POP等风格</b></p>
+						</div>
+					</div>
+					<div class="col-xs-4 text-center">
+						<p><b>Tom</b></p>
+						<img src="img/member2.jpg" class="img-circle" data-toggle="collapse" data-target="#coll2"/>
+						<br /><br />
+						<div class="collapse" id="coll2">
+							<p><b>吉他手</b></p>
+							<p><b>1990-10-23,湖北武汉人</b></p>
+							<p><b>很低调的一个乐手，十分内敛。喜欢重金属，</b></p>
+							<p><b>BLLES等风格</b></p>
+						</div>
+					</div>
+					<div class="col-xs-4 text-center">
+						<p><b>Peder</b></p>
+						<img src="img/member3.jpg" class="img-circle" data-toggle="collapse" data-target="#coll3"/>
+						<br /><br />
+						<div class="collapse" id="coll3">
+							<p><b>鼓手</b></p>
+							<p><b>1989-01-23,湖北武汉人</b></p>
+							<p><b>打击乐助教，活泼开朗的性格总是能活跃乐队</b></p>
+							<p><b>气氛</b></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--巡演-->
+		<div id="a3">
+			<div class="container">
+				<div class="row text-center">
+					<h3 style="color: white;">巡演日期</h3>
+					<p style="color: white;"><i>我们将会演绎自己的音乐。</i></p>
+					<p style="color: white;"><i>快来购票吧！</i></p>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<ul class="list-group">
+							<li href="#" class="list-group-item" style="color: gray;">
+								<b>September</b><span class="label label-danger">售完!</span>
+							</li>
+							<li href="#" class="list-group-item" style="color: gray;">
+								<b>October</b><span class="label label-danger">售完!</span>
+							</li>
+							<li href="#" class="list-group-item" style="color: gray;">
+								<b>November</b><span class="badge">3</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-4">
+						<div class="thumbnail text-center">
+							<img src="img/bj.jpg" />
+							<h4><i>北京</i></h4>
+							<p><i>Sat.28 November 2017</i></p>
+							<button type="button" class="btn" data-toggle="modal" data-backdrop="static"
+								 data-dismiss="modal" data-target="#moda">购票</button>
+						</div>
+					</div>
+					<div class="col-xs-4">
+						<div class="thumbnail text-center">
+							<img src="img/sh.jpg" />
+							<h4><i>上海</i></h4>
+							<p><i>Sun.29 November 2017</i></p>
+							<button type="button" class="btn" data-toggle="modal" data-backdrop="static"
+								 data-dismiss="modal" data-target="#moda">购票</button>
+						</div>
+					</div>
+					<div class="col-xs-4">
+						<div class="thumbnail text-center">
+							<img src="img/wh.jpg" />
+							<h4><i>武汉</i></h4>
+							<p><i>Fri.27 November 2017</i></p>
+							<button type="button" class="btn" data-toggle="modal" data-backdrop="static"
+								 data-dismiss="modal" data-target="#moda">购票</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--联系-->
+		<div id="a4">
+			<div class="container">
+				<div class="row text-center">
+					<h3>联系我们</h3>
+					<p><b><i>我们热爱我们的粉丝！</i></b></p>
+				</div>
+				<div class="row">
+					<div class="col-xs-4">
+						<p><b>喜欢我们就给我们留言吧</b></p>
+						<p><b><span class="glyphicon glyphicon-map-marker"></span>武汉，中国</b></p>
+						<p><b><span class="glyphicon glyphicon-phone"></span>电话: +00 1515151515</b></p>
+						<p><b><span class="glyphicon glyphicon-envelope"></span>邮箱地址:mail@mail.com</b></p>
+					</div>
+					<div class="col-xs-8">
+						<div class="row">
+							<div class="col-xs-6">
+								<input type="text" class="form-control" placeholder="Name" />
+							</div>
+							<div class="col-xs-6">
+								<input type="text" class="form-control" placeholder="Email" />
+							</div>
+						</div>
+						<br />
+						<div class="row">
+							<div class="col-xs-12">
+								<textarea class="form-control" rows="5" placeholder="Comment"></textarea>
+								<br />
+								<button class="btn pull-right">发送</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--地图-->
+		<div id="baidumap"></div>
+		<!--页脚-->
+		<footer class="text-center" style="background-color: black; padding: 15px;">
+			<a href="#a1" title="To-Top" data-toggle="tooltip" data-placement="top">
+				<span class="glyphicon glyphicon-chevron-up" style="color: white;"></span>
+			</a>
+			<br />
+			<img src="img/logo.png" width="120px" />
+		</footer>
+		<!--购票模态框-->
+		<div class="modal fade" id="moda" tabindex="-1" style="margin-top: 180px;">
+			<div class="modal-dialog">
+				<div class="modal-content ">
+					<div class="modal-header" style="background-color: black;color: white;">
+						<button type="button" class="close" data-dismiss="modal" style="margin-top: 10px;">
+							<span class="glyphicon glyphicon-remove" style="color: white;"></span>
+						</button>
+						<h2 class="text-center"><span class="glyphicon glyphicon-lock">Tickets</span></h2>
+					</div>
+					<div class="modal-body ">
+						<form class="form">
+							<div class="form-group" style="margin-left: 50px;">
+								<b><span class="glyphicon glyphicon-shopping-cart"></span> Tickets，每人23元</b>
+								<input type="text" class="form-control" placeholder="How many?" style="width: 470px;" />
+							</div>
+							<div class="form-group" style="margin-left: 50px;">
+								<b><span class="glyphicon glyphicon-user"></span> 发送</b>
+								<input type="text" class="form-control" placeholder="Enter email" style="width: 470px;" />
+							</div>
+							<div class="form-group" style="margin-left: 50px;">
+								<button type="button" class="btn" style="width: 470px;">
+									<span class="glyphicon glyphicon-ok">支付</span>
+								</button>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn pull-left" data-dismiss="modal">
+							<span class="glyphicon glyphicon-remove">取消</span>
+						</button>
+						<b>需要<a href="#"> 帮助？</a></b>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
